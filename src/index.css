@@ -1,0 +1,73 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'react-toastify/dist/ReactToastify.css';
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+}
+
+body {
+  background-color: #DAE0E6;
+  margin: 0;
+  padding: 0;
+}
+
+/* React Toastify Customization */
+.Toastify__toast-container {
+  z-index: 9999;
+}
+
+.Toastify__toast {
+  border-radius: 12px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  padding: 16px;
+  min-height: auto;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #46D160 0%, #38A14E 100%);
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #EA0027 0%, #C4001F 100%);
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #0079D3 0%, #005BA1 100%);
+}
+
+.Toastify__toast--warning {
+  background: linear-gradient(135deg, #FFB000 0%, #E59E00 100%);
+}
+
+.Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Custom scroll styles for threads */
+.thread-container {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.thread-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.thread-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.thread-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.thread-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
