@@ -1,19 +1,30 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 import ApperIcon from "@/components/ApperIcon";
+import { useAuth } from "@/layouts/Root";
 import SearchBar from "@/components/molecules/SearchBar";
 import Button from "@/components/atoms/Button";
 import CreatePostModal from "@/components/organisms/CreatePostModal";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("Logged out successfully");
+    } catch (error) {
+      toast.error("Failed to logout");
+    }
+  };
   return (
     <>
-      <header className="sticky top-0 bg-white border-b border-gray-200 shadow-sm z-40">
+<header className="sticky top-0 bg-white border-b border-gray-200 shadow-sm z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -75,6 +86,16 @@ const Header = () => {
                 Create Post
               </Button>
 
+              {/* Logout Button */}
+              <Button
+                onClick={handleLogout}
+                variant="outline"
+                className="hidden sm:flex"
+              >
+                <ApperIcon name="LogOut" className="w-5 h-5 mr-2" />
+                Logout
+              </Button>
+
               {/* Mobile Create Button */}
               <button
                 onClick={() => setIsCreateModalOpen(true)}
@@ -94,7 +115,7 @@ const Header = () => {
           </div>
 
           {/* Mobile Menu */}
-          {isMobileMenuOpen && (
+{isMobileMenuOpen && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -118,6 +139,16 @@ const Header = () => {
                   <ApperIcon name="TrendingUp" className="w-5 h-5" />
                   <span className="font-medium">Popular Posts</span>
                 </Link>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="flex items-center space-x-3 px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-all"
+                >
+                  <ApperIcon name="LogOut" className="w-5 h-5" />
+                  <span className="font-medium">Logout</span>
+                </button>
                 <div className="md:hidden px-4">
                   <SearchBar placeholder="Search Thread Loop..." />
                 </div>

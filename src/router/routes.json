@@ -1,0 +1,122 @@
+{
+  "/": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access to home",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/login": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access to login",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/signup": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access to signup",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/callback": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access to callback",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/error": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access to error page",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/reset-password/:appId/:fields": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access to reset password",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/prompt-password/:appId/:emailAddress/:provider": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access to prompt password",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/post/:id": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access to posts",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/r/:communityId": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access to communities",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/search": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access to search",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  }
+}
