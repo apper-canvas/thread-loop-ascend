@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 import ApperIcon from "@/components/ApperIcon";
 import { useAuth } from "@/layouts/Root";
 import SearchBar from "@/components/molecules/SearchBar";
@@ -9,8 +10,9 @@ import Button from "@/components/atoms/Button";
 import CreatePostModal from "@/components/organisms/CreatePostModal";
 
 const Header = () => {
-  const navigate = useNavigate();
+const navigate = useNavigate();
   const { logout } = useAuth();
+  const { isAuthenticated } = useSelector((state) => state.user);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -77,24 +79,39 @@ const Header = () => {
                 <ApperIcon name="Search" className="w-5 h-5" />
               </button>
 
-              {/* Create Post Button */}
-              <Button
-                onClick={() => setIsCreateModalOpen(true)}
-                className="hidden sm:flex"
-              >
-                <ApperIcon name="Plus" className="w-5 h-5 mr-2" />
-                Create Post
-              </Button>
+{/* Create Post Button - Authenticated Only */}
+              {isAuthenticated && (
+                <Button
+                  onClick={() => setIsCreateModalOpen(true)}
+                  className="hidden sm:flex"
+                >
+                  <ApperIcon name="Plus" className="w-5 h-5 mr-2" />
+                  Create Post
+                </Button>
+              )}
 
-              {/* Logout Button */}
-              <Button
-                onClick={handleLogout}
-                variant="outline"
-                className="hidden sm:flex"
-              >
-                <ApperIcon name="LogOut" className="w-5 h-5 mr-2" />
-                Logout
-              </Button>
+              {/* Logout Button - Authenticated Only */}
+              {isAuthenticated && (
+                <Button
+                  onClick={handleLogout}
+                  variant="outline"
+                  className="hidden sm:flex"
+                >
+                  <ApperIcon name="LogOut" className="w-5 h-5 mr-2" />
+                  Logout
+                </Button>
+              )}
+
+              {/* Login Button - Unauthenticated Only */}
+              {!isAuthenticated && (
+                <Button
+                  onClick={() => navigate("/login")}
+                  className="hidden sm:flex"
+                >
+                  <ApperIcon name="LogIn" className="w-5 h-5 mr-2" />
+                  Login
+                </Button>
+              )}
 
               {/* Mobile Create Button */}
               <button
@@ -139,16 +156,32 @@ const Header = () => {
                   <ApperIcon name="TrendingUp" className="w-5 h-5" />
                   <span className="font-medium">Popular Posts</span>
                 </Link>
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="flex items-center space-x-3 px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-all"
-                >
-                  <ApperIcon name="LogOut" className="w-5 h-5" />
-                  <span className="font-medium">Logout</span>
-                </button>
+{/* Logout - Authenticated Only */}
+                {isAuthenticated && (
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="flex items-center space-x-3 px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-all"
+                  >
+                    <ApperIcon name="LogOut" className="w-5 h-5" />
+                    <span className="font-medium">Logout</span>
+                  </button>
+                )}
+                {/* Login - Unauthenticated Only */}
+                {!isAuthenticated && (
+                  <button
+                    onClick={() => {
+                      navigate("/login");
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="flex items-center space-x-3 px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg transition-all"
+                  >
+                    <ApperIcon name="LogIn" className="w-5 h-5" />
+                    <span className="font-medium">Login</span>
+                  </button>
+                )}
                 <div className="md:hidden px-4">
                   <SearchBar placeholder="Search Thread Loop..." />
                 </div>
