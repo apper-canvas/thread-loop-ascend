@@ -359,7 +359,7 @@ export const postsService = {
       if (response.results) {
         const failed = response.results.filter(r => !r.success);
         if (failed.length > 0) {
-          console.error(`Failed to update post:`, failed);
+          console.error(`Failed to update post:`, JSON.stringify(failed));
           failed.forEach(record => {
             if (record.message) toast.error(record.message);
           });
